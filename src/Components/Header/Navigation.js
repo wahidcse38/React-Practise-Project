@@ -20,7 +20,7 @@ class Navigation extends Component {
                 <Navbar color="dark" dark expand="sm">
                     <div className="container">
                         <NavbarToggler onClick={this.navToggle} />
-                        <NavbarBrand href="#">ResTauRanT</NavbarBrand>
+                        <NavbarBrand href="/">ResTauRanT</NavbarBrand>
                         <Collapse navbar isOpen={this.state.isNavOpen}>
                             <Nav navbar className="ms-auto">
                                 <NavItem>
