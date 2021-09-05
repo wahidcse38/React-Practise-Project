@@ -34,7 +34,7 @@ class Contact extends Component {
     render() {
         return (
             <div className="container">
-                <div className="row row-content" style={{ paddingLeft: "20px" }}>
+                <div className="row row-content" style={{ paddingLeft: "20px", textAlign: "left" }}>
                     <div className="col-12">
                         <h3>Send Us Your Feedback</h3>
                     </div>
