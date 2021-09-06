@@ -1,4 +1,4 @@
-import DISHES from '../data/dishes';
+
 import COMMENTS from '../data/comments';
 import { combineReducers } from 'redux';
 import * as actionTypes from './actionTypes';
@@ -8,8 +8,20 @@ import * as actionTypes from './actionTypes';
 //     comments: COMMENTS,
 // }
 
-const dishReducer = (dishState = DISHES, action) => {
+const dishReducer = (dishState = { isLoading: false, dishes: [] }, action) => {
     switch (action.type) {
+        case actionTypes.DISHES_LOADING:
+            return {
+                ...dishState,
+                isLoading: true,
+                dishes: [],
+            }
+        case actionTypes.LOAD_DISHES:
+            return {
+                ...dishState,
+                isLoading: false,
+                dishes: action.payload
+            }
         default:
             return dishState;
     }
