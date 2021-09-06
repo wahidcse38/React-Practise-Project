@@ -8,7 +8,7 @@ const LoadComments = (props) => {
             return (
                 <div key={comment.id}>
                     <h3>{comment.author}</h3>
-                    <p>{comment.rating}</p>
+                    <p>Rating : {comment.rating}</p>
                     <p>{comment.comment}</p>
                     <p>{dateFormat(comment.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
                 </div>

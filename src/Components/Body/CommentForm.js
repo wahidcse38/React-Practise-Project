@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, Input, Button } from 'reactstrap';
 
+
+
 class CommentForm extends Component {
     constructor(props) {
         super(props);
@@ -20,12 +22,14 @@ class CommentForm extends Component {
     }
 
     handleSubmit = (event) => {
-        console.log(this.state)
+        this.props.addComment(this.props.dishId, this.state.author, this.state.rating, this.state.comment);
+
         this.setState({
             author: "",
             rating: "",
             comment: "",
         })
+
         event.preventDefault();
     }
 
