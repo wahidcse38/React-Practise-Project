@@ -4,17 +4,56 @@ import { baseUrl } from './baseUrl';
 
 
 export const addComment = (dishId, author, rating, comment) => {
-    return {
-        type: actionTypes.ADD_COMMENT,
-        payload: {
+    return ((dispatch) => {
+        let newComment = {
             dishId: dishId,
             author: author,
             rating: rating,
             comment: comment
         }
+        newComment.date = new Date().toISOString;
+
+        axios.post(baseUrl + "comments", newComment)
+            .then(response => response.data)
+            .then(comment => dispatch(commentConcat(comment)))
+    })
+
+}
+
+// ADD COMMENT ACTION
+
+export const commentConcat = (comment) => {
+    return {
+        type: actionTypes.ADD_COMMENT,
+        payload: comment
     }
 }
 
+// ACTION FOR COMMENTS
+const commentLoading = () => {
+    return {
+        type: actionTypes.COMMENT_LOADING
+    }
+}
+
+const loadComments = (comment) => {
+    return {
+        type: actionTypes.LOAD_COMMENTS,
+        payload: comment
+    }
+}
+
+export const fetchComments = () => {
+    return ((dispatch) => {
+        dispatch(commentLoading())
+
+        axios.get(baseUrl + "comments")
+            .then(response => response.data)
+            .then(data => dispatch(loadComments(data)))
+    })
+}
+
+// ACTION FOR DISHES
 const loadDishes = dishes => {
     return {
         type: actionTypes.LOAD_DISHES,
