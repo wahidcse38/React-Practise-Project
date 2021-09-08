@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { FormGroup, Label, Col, Button } from 'reactstrap';
+import { FormGroup, Label, Col, Button, Alert } from 'reactstrap';
 import { Form, Control, Errors, actions } from 'react-redux-form';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { baseUrl } from '../../Redux/baseUrl';
 
 
 const mapDispatchToProps = dispatch => {
@@ -16,32 +18,41 @@ const isNum = val => !isNaN(Number(val));
 const validEmail = val => /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(val);
 
 class Contact extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         firstname: '',
-    //         lastname: '',
-    //         telnum: '',
-    //         email: '',
-    //         agree: false,
-    //         contactType: 'Mobile',
-    //         message: '',
-
-    //     }
-    //     this.handleInputChange = this.handleInputChange.bind(this);
-    //     this.handleSubmit = this.handleSubmit.bind(this);
-    // }
-
-    // handleInputChange = (event) => {
-    //     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-    //     const name = event.target.name;
-    //     this.setState({
-    //         [name]: value,
-    //     })
-    // }
+    state = {
+        showAlert: false,
+        alertMsg: null,
+        alertType: null
+    }
 
     handleSubmit = values => {
-        console.log(values);
+        axios.post(baseUrl + "feedback", values)
+            .then(response => response.status)
+            .then(status => {
+                if (status === 201) {
+                    this.setState({
+                        showAlert: true,
+                        alertMsg: "Submitted Successfully",
+                        alertType: "success"
+                    });
+                    setTimeout(() => {
+                        this.setState({
+                            showAlert: false
+                        })
+                    }, 2000);
+                }
+            })
+            .catch(err => {
+                this.setState({
+                    showAlert: true,
+                    alertMsg: err.message,
+                    alertType: "danger"
+                });
+                setTimeout(() => {
+                    this.setState({
+                        showAlert: false
+                    })
+                }, 2000);
+            })
         this.props.resetFeedbackForms();
     }
 
@@ -51,6 +62,7 @@ class Contact extends Component {
             <div className="container">
                 <div className="row row-content" style={{ paddingLeft: "20px", textAlign: "left" }}>
                     <div className="col-12">
+                        <Alert isOpen={this.state.showAlert} color={this.state.alertType}>{this.state.alertMsg}</Alert>
                         <h3>Send Us Your Feedback</h3>
                     </div>
                     <div className="col-12 col-md-7" >

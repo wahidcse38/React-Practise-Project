@@ -288,6 +288,13 @@
       "rating": "4",
       "comment": "sfdfgjhjkjj",
       "id": 31
+    },
+    {
+      "dishId": 2,
+      "author": "Wahid",
+      "rating": "5",
+      "comment": "safsf",
+      "id": 32
     }
   ],
   "feedback": [
@@ -350,6 +357,36 @@
       "contactType": "Mobile",
       "message": "EWHWJ",
       "id": 6
+    },
+    {
+      "firstname": "sddsadf",
+      "lastname": "ascasc",
+      "telnum": "01813817063",
+      "email": "wahid.cse38@gmail.com",
+      "agree": true,
+      "contactType": "Mobile",
+      "message": "sadfghgj",
+      "id": 7
+    },
+    {
+      "firstname": "sddsadf",
+      "lastname": "wahid",
+      "telnum": "01813817063",
+      "email": "wahid.cse38@gmail.com",
+      "agree": false,
+      "contactType": "Mobile",
+      "message": "asdfghj",
+      "id": 8
+    },
+    {
+      "firstname": "sddsadf",
+      "lastname": "sdvsdvsdv",
+      "telnum": "13243254786",
+      "email": "abc@gmail.com",
+      "agree": true,
+      "contactType": "Email",
+      "message": "xzFzdgDH",
+      "id": 9
     }
   ]
 }
