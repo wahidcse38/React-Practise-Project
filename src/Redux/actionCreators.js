@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
-import DISHES from '../data/dishes';
+import axios from 'axios';
+import { baseUrl } from './baseUrl';
 
 
 export const addComment = (dishId, author, rating, comment) => {
@@ -29,9 +30,9 @@ const dishesLoading = () => {
 export const fetchDishes = () => {
     return ((dispatch) => {
 
-        setTimeout(() => {
-            dispatch(loadDishes(DISHES))
-        }, 2000)
+        axios.get(baseUrl + "dishes")
+            .then(response => response.data)
+            .then(dishes => dispatch(loadDishes(dishes)))
 
         dispatch(dishesLoading())
 
